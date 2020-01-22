@@ -12,8 +12,11 @@ router.post('/api/workouts', (req, res) => {
         });
 });
 
-//public folder already has defined routes so make sure that the routes match up on the front end 
-
+//  public folder already has defined routes so make sure that the routes match up on the front end 
+//  add exercises to workout //insert 
+//  put route - api/workouts/id
+//  push exercise into workout array
+//  pass workout id into route with exercise as cream filling
 router.post("/api/workouts/:id", ({ body }, res) => {
     db.Excercise.create(body)
       .then(({ _id }) => db.Workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
@@ -24,10 +27,9 @@ router.post("/api/workouts/:id", ({ body }, res) => {
         res.json(err);
       });
   });
-//add exercises to workout //insert 
-//put route - api/workouts/id
-//push exercise into workout array
-//pass workout id into route with exercise as cream filling
+
+//  get all workouts
+// /api/workouts
 
 router.post("api/workouts", (req, res) => {
     Workout.find({})
@@ -40,10 +42,6 @@ router.post("api/workouts", (req, res) => {
 });
 
 
-//get all workouts
-// /api/workouts
-
-
 //get specific workout
 //to continue workout??
 //gets last 7 workouts
@@ -52,7 +50,15 @@ router.post("api/workouts", (req, res) => {
 
 //delete workout 
 // /api/workouts
-
+Router.delete('api/workouts', (req, res) => {
+    Workout.delete({})
+    .then(dbWorkout => {
+        res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.json(err);
+        });
+});
 
 
 module.exports = router;
