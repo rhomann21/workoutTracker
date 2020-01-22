@@ -14,13 +14,30 @@ router.post('/api/workouts', (req, res) => {
 
 //public folder already has defined routes so make sure that the routes match up on the front end 
 
-router.put('/api/workouts:id', (req, res) => {
-    
-})
+router.post("/api/workouts/:id", ({ body }, res) => {
+    db.Excercise.create(body)
+      .then(({ _id }) => db.Workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
+      .then(dbWorkout => {
+        res.json(dbWorkout);
+      })
+      .catch(err => {
+        res.json(err);
+      });
+  });
 //add exercises to workout //insert 
 //put route - api/workouts/id
 //push exercise into workout array
 //pass workout id into route with exercise as cream filling
+
+router.post("api/workouts", (req, res) => {
+    Workout.find({})
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.json(err)
+        });
+});
 
 
 //get all workouts
