@@ -125,6 +125,13 @@ function handleToastAnimationEnd() {
   }
 }
 
+//takes the id out of the GET
+async function createANewWorkout() {
+  let workout = await API.createWorkout();
+  location.replace(`/exercise?id=${workout.id}`);
+  console.log('ran')
+}
+
 function clearInputs() {
   cardioNameInput.value = "";
   nameInput.value = "";

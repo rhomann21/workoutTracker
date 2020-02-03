@@ -122,26 +122,26 @@ let workoutSeed = [
       }
     ]
   },
-  {
-    day: new Date().setDate(new Date().getDate()-1),
-    exercises: [
-      {
-        type: "resistance",
-        name: "Bench",
-        duration: 30,
-        distance: 2
-      }
-    ]
-  }
+    {
+      day: new Date().setDate(new Date().getDate()-1),
+      exercises: [
+        {
+          type: "cardio",
+          name: "Bench",
+          duration: 30,
+          distance: 2
+        }
+      ]
+    }
 ];
 
 db.Workout.deleteMany({})
   .then(() => db.Workout.collection.insertMany(workoutSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
-    process.exit(0);
+    //process.exit(0);
   })
   .catch(err => {
     console.error(err);
-    process.exit(1);
+    //process.exit(1);
   });

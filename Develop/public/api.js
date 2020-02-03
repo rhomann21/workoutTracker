@@ -25,7 +25,7 @@ const API = {
     });
 
     const json = await res.json();
-
+    console.log("hi")
     return json;
   },
 
